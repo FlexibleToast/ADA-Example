@@ -11,17 +11,19 @@
   ?>
   <table>
     <tr>
-      <th>Title</th><th>Directives</th><th>Primary Manager</th>
+      <th>Title</th><th>Directives</th><th>Primary Manager</th><th>Email</th>
     </tr>
     <?php
-    while($adaList = $adaResult->fetch())
+    $adaList = $adaResult->fetchAll();
+    foreach($adaList as $row)
     {
       $primary = "SELECT rank,last_name,first_name,email FROM MEMBER
         JOIN MEMBERSHIP on MEMBERSHIP.member_num=MEMBER.member_num
-        WHERE ada_number=$adaList[0] and member_level=1;";
+        WHERE ada_num=$row[0]
+        AND member_level=1;";
       $primaryResult = $pdo->query($primary)->fetch();
       echo "    <tr>\n";
-      echo "      <td>$adaList[1]</td><td>$adaList[2]</td><td>$primaryResult[0] $primaryResult[1], $primaryResult[2]</td>\n";
+      echo "      <td>$row[1]</td><td>$row[2]</td><td>$primaryResult[0] $primaryResult[1], $primaryResult[2]</td><td> $primaryResult[3]</td>\n";
       echo "    </tr>\n";
     }
     ?>
