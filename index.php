@@ -18,9 +18,9 @@
     <?php
     while($adaList = $adaResult->fetch())
     {
-      echo "<tr>\n"
-      echo "<td>$adaList[0]</td><td>$adaList[1]</td>"
-      echo "</tr>\n"
+      echo "    <tr>\n";
+      echo "      <td>$adaList[0]</td><td>$adaList[1]</td><td>$adaList[2] $adaList[3], $adaList[4]</td>\n";
+      echo "    </tr>\n";
     }
     ?>
   </table>
