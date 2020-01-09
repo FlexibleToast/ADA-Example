@@ -7,9 +7,21 @@
   <h1>ADAs</h1>
   <?php
   $ada = "SELECT title,directive,MEMBER.rank,MEMBER.last_name,MEMBER.first_name FROM ADA
-    JOIN PRIMARY on ADA.ada_num=PRIMARY.ada_num
-    JOIN MEMBER on MEMBER.member_num=PRIMARY.member_num;";
+    JOIN PRIMARY_MANAGER on ADA.ada_num=PRIMARY_MANAGER.ada_num
+    JOIN MEMBER on MEMBER.member_num=PRIMARY_MANAGER.member_num;";
   $adaResult = $pdo->query($ada);
-  $adaList = $adaResult->fetch();
-  echo "Title: $adaList[0]"?>
+  ?>
+  <table>
+    <tr>
+      <th>Title</th><th>Directives</th><th>Primary Manager</th>
+    </tr>
+    <?php
+    while($adaList = $adaResult->fetch())
+    {
+      echo "<tr>\n"
+      echo "<td>$adaList[0]</td><td>$adaList[1]</td>"
+      echo "</tr>\n"
+    }
+    ?>
+  </table>
 </body>
