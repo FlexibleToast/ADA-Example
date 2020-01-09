@@ -6,9 +6,7 @@
 <body>
   <h1>ADAs</h1>
   <?php
-  $ada = "SELECT title,directive,MEMBER.rank,MEMBER.last_name,MEMBER.first_name FROM ADA
-    JOIN PRIMARY_MANAGER on ADA.ada_num=PRIMARY_MANAGER.ada_num
-    JOIN MEMBER on MEMBER.member_num=PRIMARY_MANAGER.member_num;";
+  $ada = "SELECT ada_num,title,directive FROM ADA;";
   $adaResult = $pdo->query($ada);
   ?>
   <table>
@@ -18,8 +16,12 @@
     <?php
     while($adaList = $adaResult->fetch())
     {
+      $primary = "SELECT rank,last_name,first_name,email FROM MEMBER
+        JOIN MEMBERSHIP on MEMBERSHIP.member_num=MEMBER.member_num
+        WHERE ada_number=$adaList[0] and member_level=1;";
+      $primaryResult = $pdo->query($primary)->fetch();
       echo "    <tr>\n";
-      echo "      <td>$adaList[0]</td><td>$adaList[1]</td><td>$adaList[2] $adaList[3], $adaList[4]</td>\n";
+      echo "      <td>$adaList[1]</td><td>$adaList[2]</td><td>$primaryResult[0] $primaryResult[1], $primaryResult[2]</td>\n";
       echo "    </tr>\n";
     }
     ?>
