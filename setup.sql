@@ -29,7 +29,6 @@ create table MEMBERSHIP
   (membership_num int auto_increment primary key,
   ada_num         int,
   member_num      int,
-  primary key(ada_num, member_num)
   foreign key(ada_num)    references ADA(ada_num),
   foreign key(member_num)  references MEMBER(member_num));
 
