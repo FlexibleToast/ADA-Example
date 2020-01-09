@@ -6,9 +6,9 @@
 <body>
   <h1>ADAs</h1>
   <?php
-  $ada = "SELECT title,directive,ADA.primary_manager,ADA.secondary_manager FROM ADA
-    JOIN MEMBER on primary_manager=MEMBER.member_num
-    JOIN MEMBER on secondary_manager=MEMBER.member_num;";
+  $ada = "SELECT title,directive,MEMBER.rank,MEMBER.last_name,MEMBER.first_name FROM ADA
+    JOIN PRIMARY on ADA.ada_num=PRIMARY.ada_num
+    JOIN MEMBER on MEMBER.member_num=PRIMARY.member_num;";
   $adaResult = $pdo->query($ada);
   $adaList = $adaResult->fetch();
   echo "Title: $adaList[0]"?>
