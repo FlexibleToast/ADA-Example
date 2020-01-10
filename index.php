@@ -23,7 +23,7 @@
         AND member_level=1;";
       $primaryResult = $pdo->query($primary)->fetch();
       echo "    <tr>\n";
-      echo "      <td><a href="/members.php?ada=$row[0]">$row[1]</a></td><td>$row[2]</td><td>$primaryResult[0] $primaryResult[1], $primaryResult[2]</td><td> $primaryResult[3]</td>\n";
+      echo "      <td><a href='/members.php?ada=$row[0]'>$row[1]</a></td><td>$row[2]</td><td>$primaryResult[0] $primaryResult[1], $primaryResult[2]</td><td> $primaryResult[3]</td>\n";
       echo "    </tr>\n";
     }
     ?>

@@ -17,11 +17,11 @@ $memberResult = $pdo->query($membersQuery);
     $memberList = $memberResult->fetchAll();
     foreach ($memberList as $row)
     {
-      if (row[0] == 1) {
+      if ($row[0] == "1") {
 echo "      <tr>\n";
 echo "        <td>Primary</td><td>$row[1] $row[2], $row[3]</td><td>$row[4]</td>\n";
 echo "      </tr>\n";
-      }elseif (row[0] == 2) {
+      }elseif ($row[0] == "2") {
 echo "      <tr>\n";
 echo "        <td>Secondary</td><td>$row[1] $row[2], $row[3]</td><td>$row[4]</td>\n";
 echo "      </tr>\n";
