@@ -1,21 +1,37 @@
 <html>
 <title>Member List</title>
 <head>
-<?php require_once('pdoconnect.php') ?>
+<?php require_once('pdoconnect.php');
+$ada = $_GET['ada'];
+$membersQuery = "SELECT MEMBERSHIP.member_level,rank,last_name,first_name,email FROM MEMBER
+  JOIN MEMBERSHIP ON MEMBERSHIP.member_num=MEMBER.member_num
+  WHERE ada_num = $ada
+  ORDER BY member_level,last_name;";
+$memberResult = $pdo->query($membersQuery);
+?>
 </head>
 <body>
   <h1>Members</h1>
   <table>
-    <tr>
-<?php
-$primary = "SELECT rank,last_name,first_name,email FROM MEMBER
-  JOIN PRIMARY_MANAGER ON PRIMARY_MANAGER.member_num=MEMBER.member_num
-  WHERE PRIMARY_MANAGER.ada_num='$_GET["ada"]';";
-$primaryResult = $pdo->query($primary);
-$primaryMember = $primaryResult->fetch() ;
-echo "      <td>Primary</td><td>$primaryMember[0] $primaryMember[1], $primaryMember[2]</td><td> $primaryMember[3]</td>";
-?>
-    </tr>
+    <?php
+    $memberList = $memberResult->fetchAll();
+    foreach ($memberList as $row)
+    {
+      if (row[0] == 1) {
+echo "      <tr>\n";
+echo "        <td>Primary</td><td>$row[1] $row[2], $row[3]</td><td>$row[4]</td>\n";
+echo "      </tr>\n";
+      }elseif (row[0] == 2) {
+echo "      <tr>\n";
+echo "        <td>Secondary</td><td>$row[1] $row[2], $row[3]</td><td>$row[4]</td>\n";
+echo "      </tr>\n";
+      }else{
+echo "      <tr>\n";
+echo "        <td></td><td>$row[1] $row[2], $row[3]</td><td>$row[4]</td>\n";
+echo "      </tr>\n";
+      }
+    }
+    ?>
   </table>
 </body>
 </html>
